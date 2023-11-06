@@ -12,12 +12,13 @@ $(document).ready(function() {
         var selectedList = Object.values(selected).join(", ");
         $('.amenities h4').text(selectedList);
     });
-});
-
-$.get("http://0.0.0.0:5001/api/v1/status/", function(data, textStatus) {
-    if (data.status === "OK") {
-        $("#api_status").addClass("available");
-    } else {
-        $("#api_status").removeClass("available");
-    }
+    const link = "http://0.0.0.0:5001/api/v1/status/";
+    $.get(link, function(data, textStatus) {
+        if (textStatus === 'success' && data.status === 'OK') {
+            $("#api_status").addClass("available");
+            console.log(data);
+        } else {
+            $("#api_status").removeClass("available");
+        }
+    });
 });
